@@ -13,10 +13,11 @@ In Dino, I have implemented custom components, including HStacks and VStacks, si
 
 Here's an example of a simple counter app built with Dino using components:
 
+[You can experiment with it here](https://jsfiddle.net/Lq8nxav3/2/)
 ```typescript
 <body></body>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="dist/bundle.umd.js"></script>
+<script src="https://github.com/Muvels/Dino/releases/download/0.0.1/bundle.umd.js"></script>
 <script lang="ts">
     const { HtmlDocument, Reactive, h } = Dino;
 
@@ -60,6 +61,7 @@ This example creates a simple counter app with two buttons: one to increment the
 ## Example - Todo List
 Here's an example of a todo list app built with Dino using components:
 
+[You can experiment with it here](https://jsfiddle.net/avchk5gs/)
 ```typescript
 <!doctype html>
 <html lang="en">
@@ -70,7 +72,7 @@ Here's an example of a todo list app built with Dino using components:
   </head>
   <body>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="dist/bundle.umd.js"></script>
+    <script src="https://github.com/Muvels/Dino/releases/download/0.0.1/bundle.umd.js"></script>
     <script lang="ts">
       const { HtmlDocument, Reactive, h } = Dino;
 
