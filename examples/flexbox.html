@@ -1,0 +1,44 @@
+<body></body>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../dist/bundle.umd.js"></script>
+<script lang="ts">
+  const { HtmlDocument, Reactive, h } = Dino;
+
+  const body = () => {
+    const reactiveData = new Reactive({
+      buttonText: 'Click Me',
+      buttonColor: 'blue',
+    });
+
+    const updateButtonText = () => {
+      reactiveData.buttonText = 'Appendo';
+    };
+
+    return h
+      .div()
+      .addClass(['bg-yellow-500', 'w-full', 'border'])
+      .appendChild(
+        h
+          .button()
+          .bindTextContent('buttonText', reactiveData)
+          .bindStyle('buttonColor', reactiveData, 'backgroundColor')
+          .setStyle({ color: 'white', padding: '10px' })
+          .onClick(() => {
+            reactiveData.buttonText = 'Clicked!';
+            reactiveData.buttonColor = 'green';
+            updateButtonText();
+          }),
+      );
+  };
+
+  const app = h
+    .HStack()
+    .setStyle({ width: '100%', height: '100%' })
+    .gap('20px')
+    .center({ x: true, y: false })
+    .appendChild(body())
+    .appendChild(body())
+    .appendChild(body());
+
+  new HtmlDocument(app);
+</script>
