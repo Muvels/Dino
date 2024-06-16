@@ -1,0 +1,40 @@
+<body></body>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://github.com/Muvels/Dino/releases/download/0.0.1/bundle.umd.js"></script>
+<script lang="ts">
+    const { HtmlDocument, Reactive, h } = Dino;
+
+    const Counter = () => {
+      const reactiveData = new Reactive({
+        count: 0
+      });
+
+      return (
+        h.div()
+          .addClass(["bg-gray-200", "p-4", "rounded"])
+          .appendChild(
+            h.h1()
+            .bindTextContent('count', reactiveData)
+            .setStyle({ fontSize: '3rem' })
+            )
+          .appendChild(
+            h.div()
+              .addClass(["flex", "justify-center", "mt-4"])
+              .appendChild(
+                h.button()
+                  .addClass(["bg-blue-500", "text-white", "px-4", "py-2", "rounded", "mr-2"])
+                  .setTextContent("Increment")
+                  .onClick(() => reactiveData.count++)
+              )
+              .appendChild(
+                h.button()
+                  .addClass(["bg-red-500", "text-white", "px-4", "py-2", "rounded"])
+                  .setTextContent("Decrement")
+                  .onClick(() => reactiveData.count--)
+              )
+          )
+      )
+    }
+
+    new HtmlDocument(Counter());
+</script>
