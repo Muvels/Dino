@@ -9,6 +9,9 @@ jobs:
   build-and-release:
     runs-on: ubuntu-latest
 
+    env:
+      VERSION_PREFIX: 0.0.
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -24,21 +27,23 @@ jobs:
     - name: Build project
       run: npm run build
 
-    - name: Get current version
+    - name: Get current version from tags
       id: get_version
-      run: echo "::set-output name=current_version::$(git describe --tags --abbrev=0)"
+      run: |
+        latest_tag=$(git describe --tags --abbrev=0 || echo "0.0.0")
+        echo "Latest tag: $latest_tag"
+        echo "::set-output name=current_version::$latest_tag"
 
     - name: Increment version
       id: increment_version
       run: |
         current_version=${{ steps.get_version.outputs.current_version }}
-        version_prefix="0.0."
         if [[ "$current_version" =~ ^0\.0\.[0-9]+$ ]]; then
           patch_version=${current_version##*.}
           new_patch_version=$((patch_version + 1))
-          new_version="${version_prefix}${new_patch_version}"
+          new_version="${{ env.VERSION_PREFIX }}${new_patch_version}"
         else
-          new_version="${version_prefix}1"
+          new_version="${{ env.VERSION_PREFIX }}1"
         fi
         echo "New version: $new_version"
         echo "::set-output name=new_version::$new_version"

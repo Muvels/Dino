@@ -7,22 +7,22 @@
   </head>
   <body>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://github.com/Muvels/Dino/releases/download/0.0.1/bundle.umd.js"></script>
+    <!-- <script src="https://github.com/Muvels/Dino/releases/download/0.0.1/bundle.umd.js"></script> -->
+    <script src="../dist/bundle.umd.js"></script>
     <script lang="ts">
+      
       const { HtmlDocument, Reactive, h } = Dino;
-
       const TodoItem = (props) => {
         const todo = props.todo;
-
         const taskItem = h
           .li()
-          .addClass(['flex', 'items-center', 'mb-2'])
+          .class.add(['flex', 'items-center', 'mb-2'])
           .appendChild(
             h
               .input()
               .setType('checkbox')
               .bindChecked('completed', todo)
-              .addClass(['mr-2'])
+              .class.add(['mr-2'])
               .onInput(() => {
                 todo.completed = !todo.completed;
               }),
@@ -31,15 +31,15 @@
             h
               .span()
               .bindTextContent('text', todo)
-              .addClass(
+              .class.add(
                 todo.completed ? ['line-through', 'text-gray-500'] : [],
               ),
           );
 
         Reactive.effect(() => {
           todo.completed
-            ? taskItem.addClass(['line-through', 'text-gray-500'])
-            : taskItem.removeClass(['line-through', 'text-gray-500']);
+            ? taskItem.class.add(['line-through', 'text-gray-500'])
+            : taskItem.class.remove(['line-through', 'text-gray-500']);
         });
 
         return taskItem;
@@ -63,7 +63,7 @@
 
         return h
           .div()
-          .addClass(['bg-gray-200', 'p-4', 'rounded'])
+          .class.add(['bg-gray-200', 'p-4', 'rounded'])
           .appendChild(
             h
               .h1()
@@ -73,18 +73,18 @@
           .appendChild(
             h
               .div()
-              .addClass(['flex'])
+              .class.add(['flex'])
               .appendChild(
                 h
                   .input()
                   .bindValue('newTodo', reactiveData)
-                  .addClass(['flex-grow', 'mr-2', 'px-2', 'py-1', 'rounded'])
+                  .class.add(['flex-grow', 'mr-2', 'px-2', 'py-1', 'rounded'])
                   .onInput((e) => (reactiveData.newTodo = e.target.value)),
               )
               .appendChild(
                 h
                   .button()
-                  .addClass([
+                  .class.add([
                     'bg-blue-500',
                     'text-white',
                     'px-4',
@@ -98,7 +98,7 @@
           .appendChild(
             h
               .ul()
-              .addClass(['mt-4'])
+              .class.add(['mt-4'])
               .bindForEach('todos', reactiveData, (todo) => TodoItem({ todo })),
           );
       };

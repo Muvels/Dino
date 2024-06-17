@@ -1,6 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
@@ -28,7 +28,17 @@ export default {
       extensions: ['.js', '.ts']
     }),
     commonjs(),
-    typescript(),
+    typescript({
+      tsconfigOverride: {
+        compilerOptions: {
+          declaration: true,
+          declarationDir: 'dist/types',
+        },
+        include: ['src/**/*'],
+        exclude: ['node_modules'],
+      },
+      useTsconfigDeclarationDir: true,
+    }),
     terser()
   ]
 };
