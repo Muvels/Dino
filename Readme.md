@@ -3,6 +3,9 @@
 ![Dino_Icon](ressources/Dino_Image.webp)
 Dino is a lightweight, reactive UI library that allows developers to create interactive user interfaces with minimal overhead. It is based on the concept of reactive programming and provides a simple and intuitive API for building UI components.
 
+## Should i use this?
+No, this is just fun. This is not meant for real world usage :)
+
 ## Why?
 My main goal was to write a library inspired by SwiftUI (for Swift), allowing me to stay entirely within the JavaScript ecosystem without having to write HTML code again.
 
